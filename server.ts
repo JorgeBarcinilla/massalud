@@ -1,12 +1,16 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import express from 'express';
-import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import bootstrap from './src/main.server';
 
 // The Express app is exported so that it can be used by serverless Functions.
-export function app(): express.Express {
+/**
+ * Create an Express server that uses the Angular CommonEngine to render the application.
+ * @returns {express.Express} The Express server
+ */
+export const app = (): express.Express => {
   const server = express();
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
   const browserDistFolder = resolve(serverDistFolder, '../browser');
@@ -20,10 +24,13 @@ export function app(): express.Express {
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
-  server.get('**', express.static(browserDistFolder, {
-    maxAge: '1y',
-    index: 'index.html',
-  }));
+  server.get(
+    '**',
+    express.static(browserDistFolder, {
+      maxAge: '1y',
+      index: 'index.html'
+    })
+  );
 
   // All regular routes use the Angular engine
   server.get('**', (req, res, next) => {
@@ -35,16 +42,19 @@ export function app(): express.Express {
         documentFilePath: indexHtml,
         url: `${protocol}://${headers.host}${originalUrl}`,
         publicPath: browserDistFolder,
-        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }]
       })
       .then((html) => res.send(html))
       .catch((err) => next(err));
   });
 
   return server;
-}
+};
 
-function run(): void {
+/**
+ * Start the Express server.
+ */
+const run = (): void => {
   const port = process.env['PORT'] || 4000;
 
   // Start up the Node server
@@ -52,6 +62,6 @@ function run(): void {
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
-}
+};
 
 run();

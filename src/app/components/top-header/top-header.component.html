@@ -1,0 +1,41 @@
+<div class="top-header-area" [ngClass]="{ 'bg-color': router.url === '/' }">
+  @if (topHeaderData$ | async; as topHeaderData) {
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-lg-6 col-md-12">
+          <ul class="top-header-contact-info">
+            <a class="pe-4" href="https://maps.app.goo.gl/h4DJSLSeyBVbTB9v5" target="_blank" rel="noopener noreferrer">
+              <li>
+                <i class="flaticon-map-location"></i>
+                {{ topHeaderData.location }}
+              </li>
+            </a>
+            <li>
+              <i class="flaticon-time-left"></i>
+              {{ topHeaderData.officeHours }}
+            </li>
+          </ul>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12">
+          <ul class="top-header-right-side">
+            <li>
+              <i class="flaticon-call"></i>
+              <a [href]="'tel:{{ topHeaderData.phoneNumber }}'">{{ topHeaderData.phoneNumber }}</a>
+            </li>
+            <li>
+              <ul class="social">
+                @for (item of topHeaderData.socials; track item) {
+                  <li>
+                    <a [href]="item.link" target="_blank">
+                      <i [class]="item.icon"></i>
+                    </a>
+                  </li>
+                }
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  }
+</div>

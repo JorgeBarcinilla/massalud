@@ -1,0 +1,87 @@
+<!-- Navbar -->
+<div class="navbar-area" [ngClass]="{ sticky: isSticky | callSignal }">
+  @if (navbarData$ | async; as navbarData) {
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" [class.active]="classApplied | callSignal">
+        <a class="navbar-brand" routerLink="/">
+          <img [src]="navbarData.logo.data.attributes.url" alt="logo" />
+        </a>
+        <a class="navbar-brand d-none" routerLink="/">
+          <img class="rounded-4" [src]="navbarData.whiteLogo.data.attributes.url" alt="logo" />
+        </a>
+        <button class="navbar-toggler" type="button" (click)="toggleClass()">
+          <span class="burger-menu">
+            <span class="top-bar"></span>
+            <span class="middle-bar"></span>
+            <span class="bottom-bar"></span>
+          </span>
+        </button>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            @for (menuItem of navbarData.menuList; track menuItem) {
+              <li class="nav-item">
+                <a
+                  [routerLink]="menuItem.menuLink"
+                  [class]="menuItem.dropdowns?.length > 0 ? 'nav-link dropdown-toggle' : 'nav-link'"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  {{ menuItem.menuName }}
+                </a>
+                <ng-container *ngIf="menuItem.dropdowns?.length > 0">
+                  <ul class="dropdown-menu">
+                    @for (dropdownMenuItem of menuItem.dropdowns; track dropdownMenuItem) {
+                      <li class="nav-item">
+                        <a
+                          [routerLink]="dropdownMenuItem.menuLink"
+                          routerLinkActive="active"
+                          [routerLinkActiveOptions]="{ exact: true }"
+                          class="nav-link"
+                        >
+                          {{ dropdownMenuItem.menuName }}
+                        </a>
+                      </li>
+                    }
+                  </ul>
+                </ng-container>
+              </li>
+            }
+          </ul>
+          <ul class="navbar-nav for-responsive">
+            <!-- for responsive -->
+            @for (menuItem of navbarData.menuList; track menuItem) {
+              <li class="nav-item">
+                <a
+                  [routerLink]="menuItem.menuLink"
+                  [class]="menuItem.dropdowns?.length > 0 ? 'nav-link dropdown-toggle' : 'nav-link'"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="toggleClass()"
+                >
+                  {{ menuItem.menuName }}
+                </a>
+                <ng-container *ngIf="menuItem.dropdowns?.length > 0">
+                  <ul class="dropdown-menu">
+                    @for (dropdownMenuItem of menuItem.dropdowns; track dropdownMenuItem) {
+                      <li class="nav-item">
+                        <a
+                          [routerLink]="dropdownMenuItem.menuLink"
+                          routerLinkActive="active"
+                          [routerLinkActiveOptions]="{ exact: true }"
+                          class="nav-link"
+                          (click)="toggleClass()"
+                        >
+                          {{ dropdownMenuItem.menuName }}
+                        </a>
+                      </li>
+                    }
+                  </ul>
+                </ng-container>
+              </li>
+            }
+          </ul>
+        </div>
+      </nav>
+    </div>
+  }
+</div>

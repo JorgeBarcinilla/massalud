@@ -1,0 +1,192 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*",
+    "node_modules/**/*",
+    "coverage/**/*",
+    "dist/**/*",
+    "documentation/**/*",
+    "*.spec.ts"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "plugins": ["@typescript-eslint/eslint-plugin", "prefer-arrow", "@ngrx"],
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/recommended",
+        "plugin:prettier/recommended",
+        "plugin:jsdoc/recommended",
+        "plugin:rxjs/recommended",
+        "plugin:import/recommended",
+        "plugin:@ngrx/all"
+      ],
+      "rules": {
+        "jsdoc/require-description": 1,
+        "jsdoc/require-hyphen-before-param-description": 1,
+        "jsdoc/require-throws": 1,
+        "jsdoc/check-syntax": 1,
+        "jsdoc/no-defaults": 1,
+        "jsdoc/require-jsdoc": [
+          "error",
+          {
+            "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": true,
+              "ClassDeclaration": true,
+              "FunctionExpression": true,
+              "ArrowFunctionExpression": false
+            },
+            "checkConstructors": false
+          }
+        ],
+        "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+        "@typescript-eslint/no-empty-interface": [
+          "error",
+          {
+            "allowSingleExtends": false
+          }
+        ],
+        "@typescript-eslint/prefer-as-const": "error",
+        "@typescript-eslint/no-shadow": "error",
+        "@typescript-eslint/no-extra-non-null-assertion": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/member-ordering": [
+          "error",
+          {
+            "default": ["static-field", "instance-field", "static-method", "instance-method"]
+          }
+        ],
+        "rxjs/throw-error": "error",
+        "rxjs/no-unsafe-catch": ["error", { "observable": "[Aa]ction(s|s\\$|\\$)$" }],
+        "rxjs/no-implicit-any-catch": "off",
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": true,
+            "methods": true,
+            "names": {
+              "^(canActivate|canActivateChild|canDeactivate|canLoad|intercept|resolve|validate|store)$": false
+            },
+            "parameters": true,
+            "properties": true,
+            "strict": false,
+            "types": {
+              "^EventEmitter$": false
+            },
+            "variables": true
+          }
+        ],
+        "prefer-arrow/prefer-arrow-functions": [
+          "warn",
+          {
+            "disallowPrototype": true,
+            "singleReturnOnly": false,
+            "classPropertiesAllowed": false
+          }
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": true,
+            "trailingComma": "none",
+            "endOfLine": "auto",
+            "tabWidth": 2,
+            "semi": true,
+            "printWidth": 120,
+            "bracketSpacing": true,
+            "bracketSameLine": false,
+            "arrowParens": "always"
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": ["property"],
+            "modifiers": ["private"],
+            "format": ["camelCase"],
+            "leadingUnderscore": "require"
+          }
+        ],
+        "@angular-eslint/prefer-on-push-component-change-detection": "error",
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/sort-ngmodule-metadata-arrays": "warn",
+        "import/no-unresolved": [0, { "ignore": ["src/.*$"] }],
+        "import/named": "off"
+      },
+      "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:prettier/recommended"],
+      "rules": {
+        "prettier/prettier": ["error", { "parser": "angular" }],
+        "@angular-eslint/template/use-track-by-function": "error",
+        "@angular-eslint/template/no-duplicate-attributes": "error",
+        "@angular-eslint/template/valid-aria": "error",
+        "@angular-eslint/template/no-interpolation-in-attributes": "error",
+        "@angular-eslint/template/no-negated-async": "error",
+        "@angular-eslint/template/no-distracting-elements": "error",
+        "@angular-eslint/template/no-call-expression": [
+          "error",
+          {
+            "allowList": ["prepareRoute"]
+          }
+        ],
+        "@angular-eslint/template/no-any": "error",
+        "@angular-eslint/template/eqeqeq": "error",
+        "@angular-eslint/template/conditional-complexity": [
+          "error",
+          {
+            "maxComplexity": 10
+          }
+        ]
+      },
+      "settings": {
+        "tailwindcss": {
+          "officialSorting": true,
+          "prependCustom": false,
+          "whitelist": [
+            "^.*-primary-.*$",
+            "^.*-secondary-.*$",
+            "^.*-danger-.*$",
+            "material-icons-outlined",
+            "material-symbols-outlined"
+          ]
+        }
+      }
+    }
+  ]
+}

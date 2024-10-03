@@ -1,0 +1,20 @@
+<!-- Default Features Section -->
+<div class="featured-area pt-100 pb-75">
+  @if (featuresData$ | async; as featuresData) {
+    <div class="container">
+      <div class="row justify-content-center">
+        @for (content of featuresData.boxes; track content) {
+          <div class="col-lg-4 col-md-6">
+            <div class="single-featured-box">
+              <div class="icon">
+                <i [class]="content.icon"></i>
+              </div>
+              <h3>{{ content.title }}</h3>
+              <p>{{ content.paragraph }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,35 @@
+<div class="services-area pt-100 pb-75 bg-d9eff9">
+  <div class="container">
+    <div class="section-title">
+      <span class="sub-title">PRODUCTOS PRINCIPALES</span>
+      <h2>Somos distribuidores exclusivos de las mejores marcas</h2>
+    </div>
+    @if (servicesData.data | callSignal; as servicesData) {
+      <div class="row justify-content-center">
+        @for (content of servicesData; track content) {
+          <div class="col-lg-4 col-md-6">
+            <div class="services-box">
+              <div class="icon bg-transparent">
+                <!-- <i class="{{content.attributes.icon}}"></i> -->
+                <img
+                  class="h-100 cover-fill rounded"
+                  [src]="content['attributes']['image']['data']['attributes']['url']"
+                  alt="icon"
+                />
+              </div>
+              <h3>
+                <a [routerLink]="['/productos', content['attributes']['slug']]">
+                  {{ content['attributes']['title'] }}
+                </a>
+              </h3>
+              <p>{{ content['attributes']['shortDesc'] }}</p>
+              <a [routerLink]="['/productos', content['attributes']['slug']]" class="link-btn">
+                Ver detalles <i class="ph-caret-right"></i>
+              </a>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

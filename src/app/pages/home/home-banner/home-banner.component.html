@@ -1,0 +1,39 @@
+@if (bannerData.data | callSignal; as bannerData) {
+  <div class="banner-main-area">
+    <div class="banner-slides">
+      <owl-carousel-o [options]="bannerSlides">
+        @for (content of bannerData['slides']; track content) {
+          <ng-template carouselSlide>
+            <div class="banner-area">
+              <div
+                class="bg-image"
+                [ngStyle]="{
+                  'background-image': 'url(' + content.bgImage.data.attributes.url + ')',
+                  'background-size': 'cover'
+                }"
+              ></div>
+              <div class="container-fluid">
+                <div class="banner-content">
+                  <span class="sub-title">{{ content.subTitle }}</span>
+                  <h1>{{ content.title }}</h1>
+                  <p>{{ content.paragraph }}</p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+    <div class="banner-owl-thumbs animate__animated animate__fadeInUp">
+      <div class="owl-thumbs">
+        @for (content of bannerData['listItems']; track content) {
+          <div class="owl-thumb-item">
+            <div class="item">
+              <span>{{ content.title }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

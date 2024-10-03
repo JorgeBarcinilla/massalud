@@ -1,0 +1,25 @@
+<!-- Default Features Section -->
+<div class="featured-area pt-100 pb-75">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nuestros objetivos</h2>
+    </div>
+  </div>
+  @if (goalsData$ | async; as goalsData) {
+    <div class="container">
+      <div class="row justify-content-center">
+        @for (content of goalsData.boxes; track content) {
+          <div class="col-lg-4 col-md-6 py-2">
+            <div class="single-featured-box">
+              <div class="icon">
+                <i [class]="content.icon"></i>
+              </div>
+              <h3>{{ content.title }}</h3>
+              <p>{{ content.paragraph }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

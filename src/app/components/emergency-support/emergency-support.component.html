@@ -1,0 +1,30 @@
+<div class="emergency-support-area ptb-55 bg-main-color">
+  <div class="container">
+    @if (emergencyData$ | async; as emergencyData) {
+      <div class="emergency-support-inner style-two">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="box">
+              <h6>{{ emergencyData.title }}</h6>
+              <a [href]="'tel:{{ emergencyData.phoneNumber }}'" class="d-flex align-items-center">
+                <i class="flaticon-call"></i>
+                {{ emergencyData.phoneNumber }}
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="box">
+              <h6>{{ emergencyData.title2 }}</h6>
+              <a [href]="'mailto:{{ emergencyData.link }}'" class="d-flex align-items-center">
+                <i class="flaticon-calendar"></i>
+                {{ emergencyData.linkText }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <div class="shape3"><img src="assets/img/shape/shape3.png" alt="shape3" /></div>
+  <div class="shape4"><img src="assets/img/shape/shape4.png" alt="shape4" /></div>
+</div>

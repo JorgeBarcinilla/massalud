@@ -1,0 +1,18 @@
+@if (partnerData$ | async; as partnerData) {
+  <div class="partner-area pb-75">
+    <div class="container">
+      <div class="section-title">
+        <h2>{{ partnerData.title }}</h2>
+      </div>
+      <div class="customers-partners-list row justify-content-center">
+        @for (item of partnerData.images.data; track item) {
+          <div class="partner-item">
+            <div class="inner">
+              <img [src]="item.attributes.url" alt="image" />
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
