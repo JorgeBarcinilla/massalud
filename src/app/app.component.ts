@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { NavigationCancel, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { AngularQueryDevtools } from '@tanstack/angular-query-devtools-experimental';
 import { NgxScrollTopComponent, NgxScrollTopModule } from 'ngx-scrolltop';
 import { filter, Subscription } from 'rxjs';
+import { environment } from '../environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TopHeaderComponent } from './components/top-header/top-header.component';
+import { SignalPipe } from './pipes/common/signal/signal.pipe';
 
 /**
  *
@@ -22,7 +24,8 @@ import { TopHeaderComponent } from './components/top-header/top-header.component
     NavbarComponent,
     CommonModule,
     TopHeaderComponent,
-    AngularQueryDevtools
+    AngularQueryDevtools,
+    SignalPipe
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -37,6 +40,7 @@ import { TopHeaderComponent } from './components/top-header/top-header.component
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(NgxScrollTopComponent) ngxScrollTop?: NgxScrollTopComponent;
   private _routerSubscription?: Subscription;
+  debugmode = signal(!environment.production);
 
   constructor(public router: Router) {}
 

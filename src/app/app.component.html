@@ -1,4 +1,6 @@
-<angular-query-devtools initialIsOpen />
+@if (debugmode | callSignal) {
+  <angular-query-devtools initialIsOpen />
+}
 <app-top-header></app-top-header>
 <app-navbar></app-navbar>
 <router-outlet></router-outlet>
