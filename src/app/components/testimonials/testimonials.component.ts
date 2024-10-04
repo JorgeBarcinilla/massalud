@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { map, Observable } from 'rxjs';
 import { Generic } from '../../shared/models/generic.model';
@@ -18,16 +18,7 @@ import { TestimonialsService } from './testimonials.service';
 })
 export class TestimonialsComponent {
   public testimonialsData$: Observable<Generic>;
-  testimonialsSlides: OwlOptions = {
-    items: 1,
-    margin: 0,
-    nav: false,
-    loop: true,
-    dots: true,
-    autoplay: false,
-    autoplayHoverPause: true,
-    navText: ["<i class='ph-caret-left'></i>", "<i class='ph-caret-right'></i>"]
-  };
+  testimonialsSlides?: OwlOptions;
 
   constructor(private content: TestimonialsService) {
     this.testimonialsData$ = this.content.getData$().pipe(
@@ -35,5 +26,17 @@ export class TestimonialsComponent {
         return testimonialsData.data.attributes;
       })
     );
+    afterNextRender(() => {
+      this.testimonialsSlides = {
+        items: 1,
+        margin: 0,
+        nav: false,
+        loop: true,
+        dots: true,
+        autoplay: false,
+        autoplayHoverPause: true,
+        navText: ["<i class='ph-caret-left'></i>", "<i class='ph-caret-right'></i>"]
+      };
+    });
   }
 }

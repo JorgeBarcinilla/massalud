@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { SignalPipe } from '../../../pipes/common/signal/signal.pipe';
 import { HomeBannerService } from './home-banner.service';
@@ -17,19 +17,22 @@ import { HomeBannerService } from './home-banner.service';
 })
 export class HomeBannerComponent {
   public bannerData;
-  bannerSlides: OwlOptions = {
-    items: 1,
-    dots: true,
-    nav: false,
-    loop: true,
-    autoplay: true,
-    animateIn: 'fadeIn',
-    animateOut: 'fadeOut',
-    autoplayHoverPause: true,
-    navText: ["<i class='ph-caret-left'></i>", "<i class='ph-caret-right'></i>"]
-  };
+  bannerSlides?: OwlOptions;
 
   constructor(private content: HomeBannerService) {
     this.bannerData = this.content.getData();
+    afterNextRender(() => {
+      this.bannerSlides = {
+        items: 1,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        animateIn: 'fadeIn',
+        animateOut: 'fadeOut',
+        autoplayHoverPause: true,
+        navText: ["<i class='ph-caret-left'></i>", "<i class='ph-caret-right'></i>"]
+      };
+    });
   }
 }
