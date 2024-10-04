@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint --fix",
     "serve:ssr:massaludips": "node dist/massaludips/server/server.mjs",
+    "serve:pm2": "NODE_ENV=production pm2 start dist/massaludips/server/server.mjs --name massalud",
     "compodoc:build": "compodoc -p tsconfig.doc.json",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s",
