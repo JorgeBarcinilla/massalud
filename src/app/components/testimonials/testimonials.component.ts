@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { afterNextRender, ChangeDetectionStrategy, Component } from '@angular/core';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Generic } from '../../shared/models/generic.model';
 import { TestimonialsService } from './testimonials.service';
@@ -11,14 +10,14 @@ import { TestimonialsService } from './testimonials.service';
 @Component({
   selector: 'app-testimonials',
   standalone: true,
-  imports: [CarouselModule, CommonModule],
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './testimonials.component.html',
   styleUrls: ['./testimonials.component.scss']
 })
 export class TestimonialsComponent {
   public testimonialsData$: Observable<Generic>;
-  testimonialsSlides?: OwlOptions;
 
   constructor(private content: TestimonialsService) {
     this.testimonialsData$ = this.content.getData$().pipe(
@@ -26,17 +25,5 @@ export class TestimonialsComponent {
         return testimonialsData.data.attributes;
       })
     );
-    afterNextRender(() => {
-      this.testimonialsSlides = {
-        items: 1,
-        margin: 0,
-        nav: false,
-        loop: true,
-        dots: true,
-        autoplay: false,
-        autoplayHoverPause: true,
-        navText: ["<i class='ph-caret-left'></i>", "<i class='ph-caret-right'></i>"]
-      };
-    });
   }
 }

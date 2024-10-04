@@ -29,13 +29,6 @@ import { SignalPipe } from './pipes/common/signal/signal.pipe';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
-  /*providers: [
-    Location,
-    {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy
-    }
-  ]*/
 })
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild(NgxScrollTopComponent) ngxScrollTop?: NgxScrollTopComponent;

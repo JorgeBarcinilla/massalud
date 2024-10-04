@@ -15,25 +15,31 @@
               <!-- <p>{{testimonialsData.paragraph}}</p> -->
             </div>
             <div class="testimonials-slides">
-              @if (testimonialsSlides) {
-                <owl-carousel-o [options]="testimonialsSlides">
-                  @for (content of testimonialsData.slides; track content) {
-                    <ng-template carouselSlide>
-                      <div class="single-testimonial-item">
-                        <i class="flaticon-left-quote"></i>
-                        <p>{{ content.feedback }}</p>
-                        <div class="client-info d-flex align-items-center">
-                          <img [src]="content.image.data.attributes.url" alt="user" />
-                          <div class="title">
-                            <h3>{{ content.name }}</h3>
-                            <span>{{ content.designation }}</span>
-                          </div>
+              <swiper-container
+                pagination="true"
+                pagination-clickable="true"
+                centered-slides="true"
+                autoplay-delay="10000"
+                autoplay-disable-on-interaction="false"
+                speed="2000"
+                loop="true"
+              >
+                @for (content of testimonialsData.slides; track content) {
+                  <swiper-slide>
+                    <div class="single-testimonial-item">
+                      <i class="flaticon-left-quote"></i>
+                      <p>{{ content.feedback }}</p>
+                      <div class="client-info d-flex align-items-center">
+                        <img [src]="content.image.data.attributes.url" alt="user" />
+                        <div class="title">
+                          <h3>{{ content.name }}</h3>
+                          <span>{{ content.designation }}</span>
                         </div>
                       </div>
-                    </ng-template>
-                  }
-                </owl-carousel-o>
-              }
+                    </div>
+                  </swiper-slide>
+                }
+              </swiper-container>
             </div>
           </div>
         </div>

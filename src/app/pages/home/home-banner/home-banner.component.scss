@@ -303,3 +303,40 @@
     }
   }
 }
+
+/* swiper styles */
+@keyframes zoomIn {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.5);
+  }
+}
+@keyframes zoomOut {
+  from {
+    transform: scale(1.5);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.swiper-slide-prev,
+.swiper-slide-active,
+.swiper-slide-duplicate-active {
+  .banner-area {
+    .bg-image-zoom-in {
+      animation-name: zoomIn;
+      animation-duration: 10s;
+      animation-fill-mode: forwards;
+    }
+    .bg-image-zoom-out {
+      animation-name: zoomOut;
+      animation-duration: 10s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
